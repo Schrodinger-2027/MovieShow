@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { dummyDateTimeData, dummyShowsData } from '../assets/assets'
 import { Heart, PlayCircleIcon, StarIcon } from 'lucide-react'
 import timeFormat from '../lib/TimeFormat'
+import DateSelect from '../component/DateSelect'
 
 const MovieDetails = () => {
   const {id} = useParams()
@@ -42,7 +43,7 @@ const MovieDetails = () => {
               <PlayCircleIcon className='w-5 h-5'/>
               Watch Trailer
               </button>
-            <a href="dateSelect" className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition
+            <a href="#dateSelect" className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition
             rounded-md font-medium cursor-pointer active:scale-95'>Buy Tickets</a>
             <button className='bg-gray-700 p-2.5 rounded-full transition cursor-pointer active:scale-95'>
               <Heart className={`w-5 h-5`}/>
@@ -62,6 +63,7 @@ const MovieDetails = () => {
           ))}
         </div>
       </div>
+      <DateSelect dateTime={show.dataTime} id={id}/>
     </div>
   ) : (
     <div>Loading Data ......</div>
