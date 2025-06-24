@@ -19,17 +19,8 @@ app.get('/' , (req , res) =>{res.send('Server is Live');});
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 
-if (process.env.NODE_ENV !== "production") {
-  const port = 3000;
-  app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-  });
-}
-
-// ✅ Export for Vercel
-export default app;
 
 
-// app.listen(port , ()=> console.log(`server is listening at http://localhost:${port}`));
+app.listen(port , ()=> console.log(`server is listening at http://localhost:${port}`));
 
 
