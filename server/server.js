@@ -3,6 +3,8 @@ import cors from 'cors';
 import 'dotenv/config';
 import { clerkMiddleware } from '@clerk/express'
 import connectDB from "./configs/db.js";
+import { serve } from "inngest/express";
+import { inngest, functions } from "./inngest/index.js"
 
 const app = express();
 const port = 3000;
@@ -13,9 +15,9 @@ app.use(clerkMiddleware())
 app.use(cors());
 
 
-app.get('/' , (req , res) =>{
-    res.send('Server is Live');
-});
+app.get('/' , (req , res) =>{res.send('Server is Live');});
+app.use("/api/inngest", serve({ client: inngest, functions }));
+
 
 
 
