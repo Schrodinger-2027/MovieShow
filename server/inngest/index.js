@@ -27,7 +27,7 @@ const syncUserDeletion = inngest.createFunction(
     async ({event})=>{
         
         const {id} = event.data
-        await User.findOneAndDelete(id)
+        await User.findByIdAndDelete(id)
     }
 )
 
@@ -45,7 +45,7 @@ const syncUserUpdation = inngest.createFunction(
             image : image_url
         }
 
-        await User.findByIdAndUpdate(userdata);
+        await User.findByIdAndUpdate(id , userdata);
     }
 )
 
