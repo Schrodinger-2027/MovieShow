@@ -1,5 +1,6 @@
 import axios from "axios"
 import Movie from "../models/Movie.js";
+import Show from "../models/Show.js";
 
 // api to add new movies to the website
 export const getNowPlayingMovies = async(req , res)=>{
@@ -52,6 +53,23 @@ export const addShow = async(req , res) =>{
             }
         }
         movie = await Movie.create(movieDetails);
+        const showToCreate = [];
+        showInput.forEach(show => {
+            const showDate = show.date;
+            show.time.forEach((time)=>{
+                const dateTimeString = `${showDate}${time}`;
+                showToCreate.push({
+                    movie : movieId,
+                    showDateTime : new Date(dateTimeString),
+                    showPrice, 
+                    occupiedSeats: {}
+                })
+            })
+        });
+        if(showToCreate.length > 0){
+            await Show.insertMany(showToCreate);
+        }
+        res.json({success : true , message : 'show added Successfully.'})
     } catch (error) {
         
     }
